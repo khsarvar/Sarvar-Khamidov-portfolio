@@ -1,0 +1,318 @@
+---
+title: "Final Project Report"
+author: "HeeJun Son, Khamidov Sarvar, and Isha Thukral"
+date: "12/15/21"
+output: html_notebook
+---
+```{r}
+# clean up the RStudio environment 
+rm(list = ls())
+
+# load all packages here: `mosaic`, `tidyverse`, `lubridate`, and all others used
+library(tidyverse)
+library(mosaicData)
+library(esquisse)
+library(dcData)
+library(lubridate)  
+library(ggplot2)
+library(readr)
+```
+
+### Data Access
+
+```{r}
+ # Tip: Scroll right if browser settings cut off the URL
+cities_internet_prices_historical_24_10_2021 <- read_csv("cities_internet_prices_historical.24-10-2021.csv")
+    
+ # Tip: Scroll right if browser settings cut off the URL
+GDP <- read_csv("GDP.csv")
+```
+
+```{r}
+head(cities_internet_prices_historical_24_10_2021)
+```
+
+```{r}
+head(GDP)
+```
+
+```{r}
+summary(cities_internet_prices_historical_24_10_2021)
+```
+
+```{r}
+summary(GDP)
+```
+```{r}
+tail(cities_internet_prices_historical_24_10_2021)
+```
+
+```{r}
+tail(GDP)
+```
+
+# Reasearch Guided Question
+
+Does the GDP of a country affect internet prices by either increasing or decreasing it?
+
+## Origin 
+We have found this data on Kaggle initially, and it represents internet prices across the world ranging from 2010-2020. The data seems to originate from the City API project site, but unfortunately, we could not retrieve information regarding the data/ data collector's origins after further research. But from exploring the website https://city-api.io/en/ they seem to provide data about the worldwide related activity. They merge data sources to fit the client's pressing questions. Some of the features are paid, but our data related to worldwide internet prices is free. This data was collected to show a trend in internet prices over the years spanning the entire world to notice trends in fees and other related factors. Finally, the last time the data was updated was a month ago, making the tables relatively up to date and accurate. 
+
+
+## Importance/ Interesting to Investing
+This issue, also known as the "digital divide," prevents pupils from developing countries from gaining access to the Internet and from connecting in this ever-globalizing market. Many people believe that Internet access should be a fundamental human right. Everyone needs equal access to the information and opportunities available from computers connected to the Internet. Unfortunately,  access to computing devices and the Internet is unevenly distributed. Some people don't have any computing devices, some have high-speed Internet on their home computers, and some are in the middle. This difference in access is the digital divide and is often due to socio-economic, geographical, or demographic factors. For example, a country like Norway has 96% citizens with internet access, while Somalia has merely 2% of the population. Hence it is essential to witness a thorough correlation analysis to see how internet prices and GDP plays a role. We chose GDP as our second data set as we see a general trend with countries with higher GDP having accessibility to the Internet while developing countries experience the opposite. 
+
+```{r}
+# Rename variable name according to R programming Style Guide
+internet <-
+  cities_internet_prices_historical_24_10_2021 %>%
+  rename("i2010" = "Internet Price, 2010",
+         "i2011" = "Internet Price, 2011",
+         "i2012" = "Internet Price, 2012",
+         "i2013" = "Internet Price, 2013",
+         "i2014" = "Internet Price, 2014",
+         "i2015" = "Internet Price, 2015",
+         "i2016" = "Internet Price, 2016",
+         "i2017" = "Internet Price, 2017",
+         "i2018" = "Internet Price, 2018",
+         "i2019" = "Internet Price, 2019",
+         "i2020" = "Internet Price, 2020")
+
+internet %>% head(10)
+```
+
+```{r}
+# Calculate total internet price per country
+modified_internet <-
+  internet %>%
+  group_by(Country) %>%
+  summarise(i2010 = sum(i2010),
+            i2011 = sum(i2011),
+            i2012 = sum(i2012),
+            i2013 = sum(i2013),
+            i2014 = sum(i2014),
+            i2015 = sum(i2015),
+            i2016 = sum(i2016),
+            i2017 = sum(i2017),
+            i2018 = sum(i2018),
+            i2019 = sum(i2019),
+            i2020 = sum(i2020)) %>%
+  arrange(desc(i2010))
+
+modified_internet %>% head(10)
+```
+
+Internet price data has year data from 1990 to 2018. We need to set the years that are in both datasets, which is from 2010 to 2018.
+
+```{r}
+# Remove 2019 and 2020 column in internet price data
+Final_internet <-
+  subset(modified_internet, select = -c(i2019,i2020))
+
+Final_internet %>%
+  head(10)
+
+# Remove years except from 2010 to 2018 and country code(we do not need)
+modified_gdp <-
+  select(GDP, -2:-22, -32)
+
+# Rename variable name according to R programming Style Guide
+Final_gdp <-
+  modified_gdp %>%
+  rename("g2010" = "2010",
+         "g2011" = "2011",
+         "g2012" = "2012",
+         "g2013" = "2013",
+         "g2014" = "2014",
+         "g2015" = "2015",
+         "g2016" = "2016",
+         "g2017" = "2017",
+         "g2018" = "2018")
+
+Final_gdp %>%
+  head(10)
+```
+
+
+```{r}
+# Merge two datasets if they have the same name in Country variable.
+Merged_data <-
+  Final_internet %>%
+  inner_join(Final_gdp, by = c("Country" = "Country"))
+
+Merged_data %>%
+  head(10)
+```
+
+We noticed that Merged_data data has 12 fewer rows than Final_internet data does. This means that there are 12 countries that are not matched between Final_gdp data and Final_internet data.
+
+```{r}
+Final_internet %>%
+  nrow()
+
+Merged_data %>%
+  nrow()
+```
+
+```{r}
+# Now, we need to look for are 12 countries really not in the Final_gdp data,or they have different format of names or typo. Using left_join() function returns NaN values if country names do not match with each other. 
+
+To_find <-
+  Final_internet %>%
+  left_join(Final_gdp, by = c("Country" = "Country"))
+
+# Find countries with NA value in g2010 variable
+To_find %>%
+  filter(is.na(g2010))
+```
+
+
+```{r}
+# To check whether country name exists, using regular expression(Regex) with pattern shows either it exists or not.
+
+Filtered_countries <- Final_gdp %>%
+  filter(grepl("Egypt|Iran|slovak|russia|Taiw|china|brunei|kyrgyz|Korea, Rep|bahamas|venezuela|united states", Country, ignore.case = TRUE))
+
+Filtered_countries
+```
+
+We found that 11 countries have different country names except Taiwan and China is divided into two cases: 'Hong Kong SAR, China' and 'Macao SAR, China'. We are going to calculate average GDP for three data and make it into one case 'People's Republic of China'.
+
+```{r}
+China_countries <- Final_gdp %>%
+  filter(grepl("china", Country, ignore.case = TRUE))
+# Calculate average(mean) for three China countries
+Merged_China_countries <- 
+  China_countries %>%
+  summarise(g2010 = mean(g2010), g2011 = mean(g2011), g2012 = mean(g2012), g2013 = mean(g2013), g2014 = mean(g2014), g2015 = mean(g2015), g2016 = mean(g2016), g2017 = mean(g2017), g2018 = mean(g2018)) %>%
+  add_column(Country = "People's Republic of China", .before = 1)
+
+Merged_China_countries
+```
+
+```{r}
+# After that, we replace the 11 country names with matched country names that we found above.
+Rename <- Final_gdp
+
+Rename[Rename == "Bahamas, The"] <- 'The Bahamas'
+Rename[Rename == "Brunei Darussalam"] <- 'Brunei'
+Rename[Rename == "Egypt, Arab Rep."] <- 'Egypt'
+Rename[Rename == "Iran, Islamic Rep."] <- 'Iran'
+Rename[Rename == "Kyrgyz Republic"] <- 'Kyrgyzstan'
+Rename[Rename == "Korea, Rep."] <- 'South Korea'
+Rename[Rename == "Russian Federation"] <- 'Russia'
+Rename[Rename == "Slovak Republic"] <- 'Slovakia'
+Rename[Rename == "United States"] <- 'United States of America'
+Rename[Rename == "Venezuela, RB"] <- 'Venezuela'
+
+Rename %>%
+  head(10)
+```
+
+```{r}
+# Then, we append two dataframe(Merged_China_countries and Rename)
+Renamed_Final_gdp <-
+  rbind(Merged_China_countries, Rename)
+
+Renamed_Final_gdp %>%
+  head(10)
+```
+
+```{r}
+# Now, we can successfully merge two data source with inner join.
+Final_Merged_data <-
+  Final_internet %>%
+  inner_join(Renamed_Final_gdp, by = c("Country" = "Country"))
+
+Final_Merged_data %>%
+  head(10)
+```
+
+```{r}
+# Note that, there are only 1 difference in number of rows which is country "Taiwan".
+Final_internet %>%
+  nrow()
+Final_Merged_data %>%
+  nrow()
+```
+
+```{r}
+# Select top 35 countries for visualization
+random_countries <- 
+  Final_Merged_data %>%
+  top_n(35)
+
+# Filter out the outlier
+random_countries <- random_countries %>%
+  filter(i2018 < 1500)
+random_countries
+
+```
+
+```{r}
+library(leaflet)
+library(maps)
+
+Gdp2018 <-
+  Renamed_Final_gdp %>%
+  select("Country", "g2018")
+
+data(world.cities)
+
+# merge the desired cols from that data frame with yours by country
+GDP_2018_lat_lng <- world.cities %>%
+    filter(capital == 1) %>%
+    dplyr::select(country = country.etc, lat, lng = long) %>%
+    left_join(Gdp2018, ., by = c("Country" = "country")) %>%
+    drop_na()
+
+GDP_2018_lat_lng %>%
+  head(10)
+```
+```{r}
+# Visualize GDP data into world map
+library(leaflet)
+worldMap <-
+  leaflet(GDP_2018_lat_lng) %>%           
+  addTiles() %>%                  
+  addCircleMarkers(radius = ~sqrt(g2018)/30)
+
+worldMap
+```
+
+```{r}
+# Visualization to show the relationship/correlation between GDP and Internet price
+ggplot(data = random_countries, aes(g2010, i2010)) +
+  geom_point(aes(color = Country), xmax = 1200) +
+  ggtitle("GDP vs Internet Price 2010") +
+  labs(y="Internet Price for 2010", x = "GDP 2010") + 
+  geom_smooth(method=lm, se=FALSE)
+
+ggplot(data = random_countries, aes(g2011, i2011)) +
+  geom_point(aes(color = Country), xmax = 1200) +
+  ggtitle("GDP vs Internet Price 2011") +
+  labs(y="Internet Price for 2011", x = "GDP 2011") + 
+  geom_smooth(method=lm, se=FALSE)
+
+ggplot(data = random_countries, aes(g2014, i2014)) +
+  geom_point(aes(color = Country), xmax = 1200) +
+  ggtitle("GDP vs Internet Price 2014") +
+  labs(y="Internet Price for 2014", x = "GDP 2014") +
+  geom_smooth(method=lm, se=FALSE)
+
+ggplot(data = random_countries, aes(g2018, i2018)) +
+  geom_point(aes(color = Country), xmax = 1200) +
+  ggtitle("GDP vs Internet Price 2018") +
+  labs(y="Internet Price for 2018", x = "GDP 2018") + 
+  geom_smooth(method=lm, se=FALSE)
+```
+
+
+## Technical challenge  
+
+Before reaching our visual portion of the project, one of our biggest challenges was our difficulty joining the GDP and Internet prices table. Many of the country names didn't precisely match to join, causing some challenges in understanding and manipulating our data. Within our EDA, we had to manually rename all countries that had different spelling physically, were abbreviated, or were conflicting territories not recognized in a table. One specific country we came across a technical problem with was China. As there are a lot of conflicting regions and since only one internet price was labeled for the country, our only solution was to combine 'Hong Kong SAR, China and 'Macao SAR, China.' We manually fixed this case as there was no alternative option. So we combined the GDP of all three territories and evaluated it as one case, "The People's Republic of China." In the end, although we didn't encounter any difficult technical situations, this was an obstacle that we had to work around as independent data collectors may have different views on territorial concerns. 
+
+
+## Conclusion
+
+Our main goal was to witness a correlation between GDP and Internet prices. In our visualization section, we started by making a leaflet map to see the spread and distribution of GDP in the world see higher GDP in European countries and lower GDP in African countries. After we saw the nations, we began to compare GDP to Internet prices in the following year: 2010, 2011, 2014, and 2018. Finally, after choosing 35 random countries worldwide, we used geom_point to note them and geom_smooth to witness a trend. From our conclusion, we can state that during the year 2010, there is a direct relationship between the x and y-axis as the higher prices correlate to higher GDP. This is different from the conclusion for 2011, 2014, and 2018, as the relationship is inverse. To understand this, we considered that around 2008-2009, there was a  market crash in which well-known tech stocks were under the water. Hence, we see this roll into 2010 when only wealthy countries could survive higher prices. While this gets leveled off over the years, we can conclude that internet prices in 2018 are low for high GDP countries as wide accessibility and a competitive market drive down costs.
