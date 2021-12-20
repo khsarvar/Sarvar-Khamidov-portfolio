@@ -4,3 +4,4 @@ Sarvar Khamidov's data science related projects
 * Data Access: 2 csv files
 * Data Wrangling / Cleaning
 * Data Visualization
+![](/pictures/GDP:IP result.png)
