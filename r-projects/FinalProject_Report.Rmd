@@ -86,17 +86,17 @@ internet %>% head(10)
 modified_internet <-
   internet %>%
   group_by(Country) %>%
-  summarise(i2010 = sum(i2010),
-            i2011 = sum(i2011),
-            i2012 = sum(i2012),
-            i2013 = sum(i2013),
-            i2014 = sum(i2014),
-            i2015 = sum(i2015),
-            i2016 = sum(i2016),
-            i2017 = sum(i2017),
-            i2018 = sum(i2018),
-            i2019 = sum(i2019),
-            i2020 = sum(i2020)) %>%
+  summarise(i2010 = mean(i2010),
+            i2011 = mean(i2011),
+            i2012 = mean(i2012),
+            i2013 = mean(i2013),
+            i2014 = mean(i2014),
+            i2015 = mean(i2015),
+            i2016 = mean(i2016),
+            i2017 = mean(i2017),
+            i2018 = mean(i2018),
+            i2019 = mean(i2019),
+            i2020 = mean(i2020)) %>%
   arrange(desc(i2010))
 
 modified_internet %>% head(10)
@@ -315,4 +315,5 @@ Before reaching our visual portion of the project, one of our biggest challenges
 
 ## Conclusion
 
-Our main goal was to witness a correlation between GDP and Internet prices. In our visualization section, we started by making a leaflet map to see the spread and distribution of GDP in the world see higher GDP in European countries and lower GDP in African countries. After we saw the nations, we began to compare GDP to Internet prices in the following year: 2010, 2011, 2014, and 2018. Finally, after choosing 35 random countries worldwide, we used geom_point to note them and geom_smooth to witness a trend. From our conclusion, we can state that during the year 2010, there is a direct relationship between the x and y-axis as the higher prices correlate to higher GDP. This is different from the conclusion for 2011, 2014, and 2018, as the relationship is inverse. To understand this, we considered that around 2008-2009, there was a  market crash in which well-known tech stocks were under the water. Hence, we see this roll into 2010 when only wealthy countries could survive higher prices. While this gets leveled off over the years, we can conclude that internet prices in 2018 are low for high GDP countries as wide accessibility and a competitive market drive down costs.
+Our main goal was to witness a correlation between GDP and Internet prices. In our visualization section, we started by making a leaflet map to see the spread and distribution of GDP in the world see higher GDP in European countries and lower GDP in African countries. After we saw the nations, we began to compare GDP to Internet prices in the following year: 2010, 2011, 2014, and 2018. Finally, after choosing 35 random countries worldwide, we used geom_point to note them and geom_smooth to witness a trend. From our conclusion, we can state that during years of 2010, 2011, 2014 and 2018 we are witnessing positive correlation between the country's gross domestic product and country's average internet price.
+
