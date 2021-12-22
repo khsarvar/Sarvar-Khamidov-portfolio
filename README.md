@@ -4,7 +4,7 @@ Sarvar Khamidov's data science related projects
 * Used two data csv files from Kaggle
 * Data Wrangling / Cleaning: General data wrangling, join operations, regular expressions and etc
 * Data Visualization: dot plot with correlation line, leaflet map of the world
-![](/pictures/GDP:IP-result.png)
+![](/pictures/GDPvsIP2018.png)
 
 # [Project 2: Stock Prediction(JupyterNotebook)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/blob/main/JupyterProjects/StockPrediction.ipynb)
 Let's say we want to make money by buying stocks. Since we want to make money, we only want to buy stock on days when the price will go up (we're against shorting the stock). We'll create a machine learning algorithm to predict if the stock price will increase tomorrow. If the algorithm says that the price will increase, we'll buy stock. If the algorithm says that the price will go down, we won't do anything.
