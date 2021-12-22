@@ -14,5 +14,5 @@ We want to maximize our true positives - days when the algorithm predicts that t
 This means that we will have to accept a lot of false negatives - days when we predict that the price will go down, but it actually goes up. This is okay, since we'd rather minimize our potential losses than maximize our potential gains.
 
 # [Project 3: VastChallenge(Tableau)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/tree/main/Tableau)
-
+Mini-Challenge 2 uses a collection of spreadsheets and geospatial files to detail the activities of GASTech employees, including staff that are members of the Protectors of Kronos (POK) as they prepare for their daring kidnapping of GASTech employees. Hidden among the daily routines of regular employees are activities such as practicing the kidnapping route and monitoring   the targets’ homes to gather information. This dataset identifies the potential members of POK and their intended targets.
 ![](/pictures/VastChallenge.png)
