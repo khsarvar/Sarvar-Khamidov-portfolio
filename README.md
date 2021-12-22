@@ -12,3 +12,7 @@ Let's say we want to make money by buying stocks. Since we want to make money, w
 We want to maximize our true positives - days when the algorithm predicts that the price will go up, and it actually goes go up. Therefore, we'll be using precision as our error metric for our algorithm, which is true positives / (false positives + true positives). This will ensure that we minimize how much money we lose with false positives (days when we buy the stock, but the price actually goes down).
 
 This means that we will have to accept a lot of false negatives - days when we predict that the price will go down, but it actually goes up. This is okay, since we'd rather minimize our potential losses than maximize our potential gains.
+
+# [Project 3: VastChallenge(Tableau)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/tree/main/Tableau)
+
+![]()
