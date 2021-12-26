@@ -11,7 +11,7 @@ Our aim in this project is to find mobile app profiles that are profitable for t
 
 At our company, we only build apps that are free to download and install, and our main source of revenue consists of in-app ads. This means that our revenue for any given app is mostly influenced by the number of users that use our app. Our goal for this project is to analyze data to help our developers understand what kinds of apps are likely to attract more users.
 
-# [Project 3: Stock Prediction(JupyterNotebook)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/blob/main/JupyterProjects/StockPrediction.ipynb)
+# [Project 3: Stock Prediction(JupyterNotebook)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/blob/main/JupyterProjects/StockProject.ipynb)
 Let's say we want to make money by buying stocks. Since we want to make money, we only want to buy stock on days when the price will go up (we're against shorting the stock). We'll create a machine learning algorithm to predict if the stock price will increase tomorrow. If the algorithm says that the price will increase, we'll buy stock. If the algorithm says that the price will go down, we won't do anything.
 
 We want to maximize our true positives - days when the algorithm predicts that the price will go up, and it actually goes go up. Therefore, we'll be using precision as our error metric for our algorithm, which is true positives / (false positives + true positives). This will ensure that we minimize how much money we lose with false positives (days when we buy the stock, but the price actually goes down).
