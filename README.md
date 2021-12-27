@@ -1,6 +1,6 @@
 Sarvar Khamidov's data science related projects
 
-# [Project 1: Correlation between GPD of a country and Internet Prices(RStudio)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/tree/main/r-projects)
+# [Project 1: Correlation between GDP of a country and Internet Prices(RStudio)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/tree/main/r-projects)
 * Used two data csv files from Kaggle
 * Data Wrangling / Cleaning: General data wrangling, join operations, regular expressions and etc
 * Data Visualization: dot plot with correlation line, leaflet map of the world
