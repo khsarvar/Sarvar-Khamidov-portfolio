@@ -1,15 +1,16 @@
 Sarvar Khamidov's data science related projects
 
-# [Project 1: Correlation between GDP of a country and Internet Prices(RStudio)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/tree/main/r-projects)
-* Used two data csv files from Kaggle
-* Data Wrangling / Cleaning: General data wrangling, join operations, regular expressions and etc
-* Data Visualization: dot plot with correlation line, leaflet map of the world
-![](/pictures/GDPvsIP2018.png)
-
 # [Project 2: Profitable App Profiles for the App Store and Google Play Markets(JupyterNotebook)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/blob/main/JupyterProjects/Profitable_App.ipynb)
 Aim in this project is to find mobile app profiles that are profitable for the App Store and Google Play markets. Working as data analysts for a company that builds Android and iOS mobile apps, and job is to enable the team of developers to make data-driven decisions with respect to the kind of apps they build.
 
 At the company that only build apps that are free to download and install, and  main source of revenue consists of in-app ads. This means that  revenue for any given app is mostly influenced by the number of users that use  app. Goal for this project is to analyze data to help our developers understand what kinds of apps are likely to attract more users.
+
+# [Project 1: Correlation between GDP of a country and Internet Prices(RStudio)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/tree/main/r-projects)
+* Used two data csv files from Kaggle
+* Data Wrangling / Cleaning: General data wrangling, join operations, regular expressions and etc
+* Data Visualization: dot plot with correlation line, leaflet map of the world
+
+![](/pictures/GDPvsIP2018.png)
 
 # [Project 3: Stock Prediction(JupyterNotebook)](https://github.com/khsarvar/Sarvar-Khamidov-portfolio/blob/main/JupyterProjects/StockProject.ipynb)
 Let's say we want to make money by buying stocks. Since we want to make money, we only want to buy stock on days when the price will go up (we're against shorting the stock). I created a machine learning algorithm to predict if the stock price will increase tomorrow. If the algorithm says that the price will increase, we'll buy stock. If the algorithm says that the price will go down, we won't do anything.
