@@ -14,7 +14,7 @@ The team was able to calculate different data perturbations for the sports betti
 Most relevant to our research is a data quality piece written by the previous DS 440 class. Citing last year’s data quality project report, data quality metrics of interest include: accuracy, column to row ratio, conformity, distribution coverage, file size, timeliness, and row uniqueness. The group did comprehensive studies on these seven metrics, and their relevance to analysis. In academic research, Model Cards for Model Reporting by M. Mitchell et al., was an excellent insight into model cards, which help compare models after training to assess quality. The Dataset Nutrition Label: A Framework To Drive Higher Data Quality Standards, by Holland et. al. was an excellent coverage of the state of the art in dataset health; their measurement depends on an investigation dataset metadata, provenance, variables, statistics, pair plots, probabilistic models, and ground truth correlations.
 On the modeling of sports betting odds, it has been shown that sports book makers do not try to more accurately predict who will win a game, instead they focus on predicting what percentage of betters will choose the favorite irrespective of the odds (Levitt 2004). In other words they are setting the odds of a bet based on the elasticity of sports bettors, and in theory, their behavior is predictable if you know the volume of betters on each side of the trade. This means that favorite teams beat their spreads more than fifty percent of the time, however if a higher percentage of bettors put their money on the favorite the system is still profitable for the bookmaker. Levitt describes how the price of a bet can be predicted based upon three variables: p, the estimated probability of the frontrunner winning; f, the fraction of total dollars bet on the frontrunner; and v, the percent commission taken by the bookkeeper. However, the problem in calculating these three variables—p, f, and v—is a lack of data. This implies that odds are systematically inaccurate. The book keepers aren’t concerned with setting a fair price for the bet. They are concerned with maximizing their profit in the following expectation: 
 
-![](Capstone/Pics/Picture1.png)
+![](/Pics/Picture1.png)
 
 This formula calculates the expected profit by summing the bookkeepers expected earnings and subtracting the expected costs. In order to maximize the expected profit, the bookkeeper would need to use the bettings odds (or prices); because f is a function of the bettings odds—meaning that as the odds changes, the percentage of bettors on each side does too—the expectation shown above becomes a function of the betting odds.
 
@@ -57,10 +57,9 @@ Before getting into the results of the models from the perturbed datasets we did
 Accordingly, we looked at each team that was playing and calculated the average points per game, average rebounds per game, average turnover per game, average field goal percentage per game,average three point percentage per game, etc. over all previous games in the dataset. We then took the absolute value of the difference in averages between the two teams.(ie. Favorite team’s average points per game 85, underdogs average points per game 67, abs(85 - 67) = 18). The intuition being that games where there is a higher differential between the teams average stats are likely the games where there is a larger spread in the odds, in other words, one team is more heavily favored than the other.
 
 After further exploratory data analysis, this intuition appears to hold fairly well.
-   
-
-
- 
+![](/Pics/Picture2.png)
+![](/Pics/Picture3.png)
+![](/Pics/Picture4.png)
 
 ### Evaluation
 Data Perturbations
@@ -105,39 +104,28 @@ See results of our model training on each perturbed dataset below:
 
 Full Dataset:
  
-
-
- 
+![](/Pics/Picture5.png)
 
 Duplicate rows:
 
- 
-
- 
+![](/Pics/Picture6.png)
 
 Random Noise
 
- 
-
-
-
-
+![](/Pics/Picture7.png)
  
 Bootstrapping
 
- 
-
-
+![](/Pics/Picture8.png)
  
 Drop Features 
 
- 
+![](/Pics/Picture9.png)
+
 Add Dummy Columns
 
- 
+![](/Pics/Picture10.png)
 
-
- 
 ### Discussion
 
 Below we will share a discussion of the effects of each dataset perturbation on the model. 
