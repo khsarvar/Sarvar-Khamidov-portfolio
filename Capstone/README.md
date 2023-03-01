@@ -1,5 +1,5 @@
-Data Quality Analysis in Sports Betting Odds
-Group 7: Avi Bewtra, RJ Krimetz, Sarvar Khamidov
+# Data Quality Analysis in Sports Betting Odds
+## Group 7: Avi Bewtra, RJ Krimetz, Sarvar Khamidov
 Introduction
 Since sports betting was legalized four years ago, Americans have wagered more than $125 Billion USD, with annual betting participation increasing rapidly. On the surface sports betting odds appear to move like any time series financial data. However research has found that there is a notable elasticity in sports bettors who consistently cluster bets behind the favorite despite unfavorable movement in the odds. This has led oddsmakers to boost profits by setting odds off of the ‘market clearing price’ more commonly observed in other financial instruments. Accordingly, preliminary backtests reveal that there are betting strategies capable of systematically exploiting these intentionally ‘inaccurate’ odds set by most bookmakers. 
 
