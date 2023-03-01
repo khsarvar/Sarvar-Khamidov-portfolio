@@ -31,7 +31,7 @@ The team was able to pull, clean and analyze other datasets from various sources
 	The group was able to get more data from the Team Rankings website. The source has historical statistics for teams and for individual players in the NBA for the last 20 years. The team's stats include various types of data, such as points per game, shooting percentage, rebounds, blocks, steals, fouls, assists and many others for each game week. The individual player statistics also have points, assists, rebounds, steals, blocks and other. The sample of web scraping of this data into proper format is in the link below:
 	Finally, for the NBA season starting on October 18th the group has access to the APISports NBA pipeline. This API provides a variety of data tables from team statistics to odds breakdowns for all bookmakers. However this dataset does not provide any historical data, but the live feed can be used going forward to expand the current dataset for forward looking predictions. The specific bets included in the data schema include 3Way Result, Home/Away, Over/Under/Highest Scoring Half, Double Chance, Over/Under (quarterly, and entire game), Odd/Even, etc. Finally, the team stats include the league, team, and relevant game stats for both home/away benches. 
  
-###Methods
+### Methods
 Dataset Perturbations
 
 We plan to attack specific quality metrics of our dataset, then compare it to the original. We will train models to predict odds based on each dataset and compare the accuracy metrics. To ensure a thorough test, we will train an ensemble of models, making sure to account for which types of models might perform better on certain datasets.
@@ -49,7 +49,7 @@ We aim to perturb our data quality metrics:
 Basic Sports Betting Model
 Since the primary focus of the project is to measure what aspects of data quality are most important in predicting sports betting odds, we need to build a variety of models on the multiple versions of the data to see what versions yield the best cross sectional results. Accordingly AutoML packages such as FLAML and PyCarret can be used to build a number of models on each dataset. We plan on implementing multiple regression models in our testing ensemble: linear and polynomial regression, SVM, Decision Trees, and Ridge Regression. The models will be trained on team/player specific data from different holdout periods before the target prediction data. The model will then be asked to predict the odds for the game and the prediction will be compared to the odds published by the bookmakers. The difference in the prediction versions of the bookmakers odds will then be compared to the result of the game to see if the lines our models predicted accurately exploit the bookmakers’ crowding bias. Through measurements of model success—using Mean Squared Error and Mean Percentage Error—we hope to understand the following at the end of these experiments: 1) which data quality metrics are most valuable when training sports betting models; and 2) which models work best with different types of poor quality data.
 
-Preprocessing 
+### Preprocessing 
 
 Before getting into the results of the models from the perturbed datasets we did some feature space cleaning. First, we wanted each line in our dataset to represent one game, with the stats and odds for both teams included in one line. Accordingly we needed to combine the odds to create our target column. Since odds are both positive and negative, we took the sum of the absolute value of the odds, making the domain of our target space positive values. The larger this value corresponded to a more heavily supported favorite.(ie. Favorite odds -450 versus underdog odds +400 - resulting in a target column of 450 + 400 = 950). 
 
@@ -61,7 +61,7 @@ After further exploratory data analysis, this intuition appears to hold fairly w
 
  
 
-Evaluation
+### Evaluation
 Data Perturbations
 https://colab.research.google.com/drive/1EsML6MiZjHHhKDY9tWCjaXiXs12NoYc1?usp=sharing 
 
@@ -99,7 +99,7 @@ In order to confirm that the mapping from our features to labels was learnable, 
 
 
 
-Results
+### Results
 See results of our model training on each perturbed dataset below:
 
 Full Dataset:
@@ -137,7 +137,7 @@ Add Dummy Columns
 
 
  
-Discussion
+### Discussion
 
 Below we will share a discussion of the effects of each dataset perturbation on the model. 
 	Duplicate Rows: A dataset with duplicate rows performed identically to the baseline model. In our investigation, we found that all models tested were able to ignore duplicate rows and converge to the same optimal solution. While we believe that this might not be true for every model, but for the ones we tested, our dataset was large enough that additional duplicate points did not affect results.
@@ -149,10 +149,10 @@ Below we will share a discussion of the effects of each dataset perturbation on 
 
 
  
-Challenges
+### Challenges
 One of the challenges that we faced with the original mode was low accuracy prediction with an MSE of around 50,000. Historically, sports betting odds has been a difficult thing to predict—similar to the stock market. However, after further examination we bevel the people had to do with the scale of the values relative to the range of the target columns.
  
-Conclusion
+### Conclusion
 Over the last four months, we reviewed the most important data quality metrics; collected a dataset of team performance information and bookkeeper odds; trained machine learning models on datasets with each identified data perturbation; and compared our results. 
 
 Invariably, we found that, with respect to sports betting, degrading data quality metrics that have an effect on the distribution of the data—random noise, dropping features, bootstrap sampling—can nearly destroy model performance. Other data quality characteristics—adding dummy features and row uniformity—do not have nearly the effect on model performance. We believe that by changing the distribution of the data, model performance will collapse. A model will still be able to learn an optimal mapping of features to labels given perturbations that change the dataset without affecting the overarching distribution.
@@ -170,7 +170,7 @@ Application:
 
 
 
-Individual Contributions
+### Individual Contributions
 Robert Krimetz: Robert Krimetz: Currently a senior studying Data Science and Economics. I am primarily interested in Quantitative finance and statistical arbitrage. Most of my experience is with time series analysis of US equities. I worked on building the machine learning pipeline for the various data perturbations and cleaned the feature space.
 Avi Bewtra: I am a senior studying Computational Data Science. I am interested in deep learning theory and systems. I am strongest in these areas, mostly using Python. I researched all of the data quality metrics we used, basing our approach off of The Dataset Nutrition Label, and last year's group’s investigation into data quality metrics. Applying these to the problem of sports betting, I continued to implement them in code and save copies of our dataset that could be fed into our models. I also collaborated in the conceptualization and design of our machine learning problem and the data cleaning.
 Sarvar Khamidov: I am a senior student majoring in Applied Data Sciences with an Information Sciences and Technology minor. Interested in learning about different machine learning algorithms and finding new applications for it. I mostly worked on data pulling and data cleaning. However, I have also helped with other parts of the projects such as machine learning and data perturbations. 
