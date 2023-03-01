@@ -147,46 +147,34 @@ Over the last four months, we reviewed the most important data quality metrics; 
 Invariably, we found that, with respect to sports betting, degrading data quality metrics that have an effect on the distribution of the data—random noise, dropping features, bootstrap sampling—can nearly destroy model performance. Other data quality characteristics—adding dummy features and row uniformity—do not have nearly the effect on model performance. We believe that by changing the distribution of the data, model performance will collapse. A model will still be able to learn an optimal mapping of features to labels given perturbations that change the dataset without affecting the overarching distribution.
 
 Throughout the semester, we also re-learned the age-old data science lesson: data collection is critical to the success of a machine learning model. We also learned that some patterns can not be easily learned, and that there is a reason sports-betting has not been a problem previously solved by machine learning. With reckless abandon, we assumed we would be able to throw together a model just good enough to analyze how data quality would affect results. We tried very hard for limited results. In earnest, our benchmark dataset just wasn’t good enough; which led to limited success to build a successful benchmark model; which led to very volatile effects to our already high error measurements. We’ve learned a lot of technical lessons, the most important of which may be that data is, in fact, king.
-Future Work
-Prepossessing:
+### Future Work
+#### Prepossessing:
 
-	We are going to create sliding window averages, by generating features by taking the average of team data in games k-11 through k-1 in order to predict odds for game k. While we have had little success modeling odds, we have found better results with  season-cumulative-average-features. As a result, we have elected to continue modeling with these features. 
-	Look to remove the Open_column_odds_x feature by somehow scaling the target columns
+We are going to create sliding window averages, by generating features by taking the average of team data in games k-11 through k-1 in order to predict odds for game k. While we have had little success modeling odds, we have found better results with  season-cumulative-average-features. As a result, we have elected to continue modeling with these features. 
+Look to remove the Open_column_odds_x feature by somehow scaling the target columns
 
-Application:
+#### Application:
 
-	Using the current models, times when our predicted spreads are larger than those observed in the betting market is interpreted in our model as being more confident that the favorite will win than the betting market and vice versa. Recall from our background research that there are systematic reasons why these mis-pricings would exist, so the next step is to see how often our model ‘prefers’ the winner and if the magnitude of the preference has any correlation to confidence in who will win.
-
-
+Using the current models, times when our predicted spreads are larger than those observed in the betting market is interpreted in our model as being more confident that the favorite will win than the betting market and vice versa. Recall from our background research that there are systematic reasons why these mis-pricings would exist, so the next step is to see how often our model ‘prefers’ the winner and if the magnitude of the preference has any correlation to confidence in who will win.
 
 ### Individual Contributions
 Robert Krimetz: Robert Krimetz: Currently a senior studying Data Science and Economics. I am primarily interested in Quantitative finance and statistical arbitrage. Most of my experience is with time series analysis of US equities. I worked on building the machine learning pipeline for the various data perturbations and cleaned the feature space.
 Avi Bewtra: I am a senior studying Computational Data Science. I am interested in deep learning theory and systems. I am strongest in these areas, mostly using Python. I researched all of the data quality metrics we used, basing our approach off of The Dataset Nutrition Label, and last year's group’s investigation into data quality metrics. Applying these to the problem of sports betting, I continued to implement them in code and save copies of our dataset that could be fed into our models. I also collaborated in the conceptualization and design of our machine learning problem and the data cleaning.
 Sarvar Khamidov: I am a senior student majoring in Applied Data Sciences with an Information Sciences and Technology minor. Interested in learning about different machine learning algorithms and finding new applications for it. I mostly worked on data pulling and data cleaning. However, I have also helped with other parts of the projects such as machine learning and data perturbations. 
-References
+
+### References
 Guardian News and Media. (2022, May 13). Americans have bet $125BN on sports in four years since legalization. The Guardian. Retrieved October 9, 2022, from https://www.theguardian.com/sport/2022/may/13/sports-gambling-125-billion-anniversary
 Holland, S., Hosny, A., Newman, S., Joseph, J., & Chmielinski, K. (2018, May 9). The Dataset Nutrition Label: A Framework to drive higher data quality standards. arXiv.org. Retrieved October 9, 2022, from https://arxiv.org/abs/1805.03677
 Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D., & Gebru, T. (2019, January 14). Model cards for Model Reporting. arXiv.org. Retrieved October 9, 2022, from https://arxiv.org/abs/1810.03993
 Why are gambling markets organised so differently from financial markets?*. (n.d.). Retrieved October 10, 2022, from https://pricetheory.uchicago.edu/levitt/Papers/LevittWhyAreGamblingMarkets2004.pdf 
 
-Appendix A, Source Code
-Kaggle Dataset - ‘NBA Historical Stats and Betting Data’
-Odds API Dataset
-APISports NBA pipeline
-Web Scraping - TeamRankings.com
-Data Perturbations
-Odds Modeling
-Appendix B, Timeline
+#### Appendix A, Source Code
+[Kaggle Dataset - ‘NBA Historical Stats and Betting Data](https://colab.research.google.com/drive/1EKZXzPZMpxa2W4R6dyXCtuo6lDd2NlqN?usp=sharing)
+[Odds API Dataset](https://colab.research.google.com/drive/1rIHf0832eVcr61oJZ6yE4yOmSKikAkZq?usp=sharing)
+[APISports NBA pipeline](https://colab.research.google.com/drive/12bpwh7HZcFL9BS290bGiUJD-l-tI-2mF?usp=sharing)
+[Web Scraping - TeamRankings.com](https://colab.research.google.com/drive/1x-QYt09evA3rErTDd5F9C-6uHygqTJeR?usp=sharing)
+[Data Perturbations](https://colab.research.google.com/drive/1EsML6MiZjHHhKDY9tWCjaXiXs12NoYc1?usp=sharing)
+[Odds Modeling](https://colab.research.google.com/drive/1HxvLl6sJpfsx4LP-zmbTtmHaBpOcMgWB?usp=sharing)
 
-Task:									
-Problem Definition	X	X							
-Dataset identification		X	X	X					
-Quality Metric Research					X				
-Dataset Perturbation/ Augmentation					X	X			
-Dataset Quality Measurement						X	X		
-Odds Modeling					X	X	X	X	
-Writing + Wrap Up								X	X
-									
-Date:	8/22	9/5	9/19	10/3	10/17	10/31	11/14	11/28	12/12
 
 
